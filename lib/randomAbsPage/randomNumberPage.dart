@@ -11,7 +11,6 @@ class RandomNumberPage extends StatefulWidget {
 }
 
 class RandomNumberPageState extends State {
-  final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
   var list, random;
   static const List title = [
     "STR",

@@ -1,6 +1,5 @@
 import 'package:trpgtool/players/createPlayerPage.dart';
 import 'package:trpgtool/repository/db_helper.dart';
-import 'package:sqflite/sqflite.dart';
 
 final String tablePlayer = 'player';
 final String columnId = '_id';

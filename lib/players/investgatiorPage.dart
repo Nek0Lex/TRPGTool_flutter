@@ -5,6 +5,8 @@ import 'package:trpgtool/repository/player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../constants.dart';
+import 'playerPageAppBar.dart';
 
 class InvestigatorPage extends StatefulWidget {
   @override
@@ -21,14 +23,13 @@ class InvestigatorPageState extends State {
   @override
   void initState() {
     super.initState();
-//    insertData();
     getAllPlayers();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainPageAppBar(context, "Investgatior"),
+      appBar: playerPageAppBar(context),
       drawer: mainPageDrawer(context),
       body: investigatorPageListViewBody(context),
       floatingActionButton: FloatingActionButton(
@@ -90,8 +91,8 @@ class InvestigatorPageState extends State {
     }
   }
 
-  Widget investigatorPageListViewBodyDisplay(
-      List<Player> allPlayers, int index) {
+  Widget investigatorPageListViewBodyDisplay(List<Player> allPlayers,
+      int index) {
     return Card(
       child: Container(
         height: 100,

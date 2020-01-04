@@ -4,23 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../constants.dart';
 import '../drawer.dart';
+import 'dicePageAppBar.dart';
 
 class DicePage extends StatefulWidget {
   DicePageState createState() => DicePageState();
 }
 
+
 class DicePageState extends State {
   var dropDownValueL, dropDownValueR;
   String d20String = "0";
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: dicePageAppBar(context, "Dice"),
-        drawer: mainPageDrawer(context),
-        body: diceSelection(),
-    );
-  }
 
   void calculateDicePoint() {
     setState(() {
@@ -34,7 +28,18 @@ class DicePageState extends State {
         d20String =  d20.roll(d20String).toString();
       }
     });
+}
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: dicePageAppBar(context, "Dice"),
+        drawer: mainPageDrawer(context),
+        body: diceSelection(),
+    );
   }
+
 
   Widget diceSelection() {
     return Column(
@@ -144,43 +149,43 @@ class DicePageState extends State {
     );
   }
 
-  Widget dicePageAppBar(BuildContext context, String title){
-    void choiceAction(String choice) {
-      if(choice == Constants.Settings){
-        Navigator.pushNamed(context, '/setting');
-      }
-    }
-
-    return AppBar(
-      title: Text(title),
-      backgroundColor: Colors.orangeAccent,
-      actions: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(MdiIcons.refresh, color: Colors.white),
-              onPressed: (){
-                calculateDicePoint();
-              }
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            PopupMenuButton<String>(
-              onSelected: choiceAction,
-              itemBuilder: (BuildContext context){
-                return Constants.choices.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            )
-          ],
-        )
-      ],
-    );
-  }
+//  Widget dicePageAppBar(BuildContext context, String title){
+//    void choiceAction(String choice) {
+//      if(choice == Constants.Settings){
+//        Navigator.pushNamed(context, '/setting');
+//      }
+//    }
+//
+//    return AppBar(
+//      title: Text(title),
+//      backgroundColor: Colors.orangeAccent,
+//      actions: <Widget>[
+//        Row(
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          children: <Widget>[
+//            IconButton(
+//              icon: Icon(MdiIcons.refresh, color: Colors.white),
+//              onPressed: (){
+//                calculateDicePoint();
+//              }
+//            ),
+//            SizedBox(
+//              width: 10,
+//            ),
+//            PopupMenuButton<String>(
+//              onSelected: choiceAction,
+//              itemBuilder: (BuildContext context){
+//                return Constants.choices.map((String choice){
+//                  return PopupMenuItem<String>(
+//                    value: choice,
+//                    child: Text(choice),
+//                  );
+//                }).toList();
+//              },
+//            )
+//          ],
+//        )
+//      ],
+//    );
+//  }
 }

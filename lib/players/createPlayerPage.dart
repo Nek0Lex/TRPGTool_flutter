@@ -112,7 +112,7 @@ class CreatePlayerFormState extends State<CreatePlayerForm> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 playerDb.openSqlite();
-                Save(_playerData);
+                save(_playerData);
                 Navigator.pushNamed(context, "/player");
               }
             },
@@ -166,7 +166,7 @@ class CreatePlayerFormState extends State<CreatePlayerForm> {
     }
   }
 
-  void Save(PlayerData playerData) async {
+  void save(PlayerData playerData) async {
     await playerDb.openSqlite();
     await playerDb.insert(new Player.fromPlayer(playerData));
     await playerDb.close();
