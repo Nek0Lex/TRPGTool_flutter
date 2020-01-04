@@ -11,7 +11,13 @@ class RandomNumberPage extends StatefulWidget {
 }
 
 class RandomNumberPageState extends State {
+  final GlobalKey<AnimatedCircularChartState> _chartKey =
+      new GlobalKey<AnimatedCircularChartState>();
   var list, random;
+  var abilityIndex = randomNumGen();
+  List<String> abilityIndexList = List.generate(7, (i) => randomNumGen());
+
+
   static const List title = [
     "STR",
     "CON",
@@ -23,9 +29,17 @@ class RandomNumberPageState extends State {
     "EDU"
   ];
 
-
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _refreshPage() async {
+      await new Future.delayed(new Duration(milliseconds: 300));
+      setState(() {
+        abilityIndexList = List.generate(7, (i) => randomNumGen());;
+      });
+      return abilityIndexList;
+    }
+
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
@@ -42,7 +56,7 @@ class RandomNumberPageState extends State {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Text(title[index]),
-                      Text(randomNumGen()),
+                      Text(abilityIndexList[index]),
                     ],
                   ),
                 ),
@@ -50,15 +64,17 @@ class RandomNumberPageState extends State {
             },
           ),
           onRefresh: () {
-            return Navigator.pushReplacementNamed(context, "/randomNumber");
+            return _refreshPage();
           },
         ),
       ),
     );
   }
+}
 
-  String randomNumGen() {
-    var rng = new Random();
-    return rng.nextInt(99).toString();
-  }
+Future<void> _refreshPage() {}
+
+String randomNumGen() {
+  var rng = new Random();
+  return rng.nextInt(99).toString();
 }
